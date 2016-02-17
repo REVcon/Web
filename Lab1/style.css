@@ -1,0 +1,54 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+}
+
+a
+{
+    text-decoration: none;
+}
+
+html, body
+{
+    height: 100%;
+    font: Arial,Helvetica,sans-serif;
+    color: #fff;
+}
+
+.header
+{
+  	background-color: #000;
+}
+
+.nav div
+{
+    height: 100%;
+    float: left;
+}
+
+.nav div span
+{
+    vertical-align: middle;
+}
+.logo
+{
+    padding-top: 7px;
+    float: left;
+}
+
+.nav
+{
+  	max-width: 1248px;
+    height: 40px;
+    margin-left: auto;
+  	margin-right: auto;
+}
+
+.sign-in
+{
+
+
+}
