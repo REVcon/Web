@@ -6,49 +6,71 @@
     border: none;
 }
 
-a
-{
-    text-decoration: none;
-}
 
 html, body
 {
     height: 100%;
-    font: Arial,Helvetica,sans-serif;
-    color: #fff;
+    font: 15px 'Arial', sans-serif;
+    font-weight: bold;
 }
 
-.header
+.black-color
 {
-  	background-color: #000;
+  	background-color: #000000;
 }
 
-.nav div
-{
-    height: 100%;
-    float: left;
-}
-
-.nav div span
-{
-    vertical-align: middle;
-}
 .logo
 {
-    padding-top: 7px;
-    float: left;
-}
-
-.nav
-{
-  	max-width: 1248px;
-    height: 40px;
-    margin-left: auto;
-  	margin-right: auto;
+   padding-top: 7px;
+   padding-right: 100px;
+   border-right: 1px solid #666666;
 }
 
 .sign-in
 {
+    padding-top: 7px;
+    color: #ffffff;
+    border-right: 1px solid #666666;
+}
+
+/*ul
+{
+    list-style-type: none;
+    color: #ffffff;
+}*/
+
+a
+{
+    text-decoration: none;
+    color: #ffffff;
+}
+/*
+.vcenter {
+  display: inline-block;
+  float: none;
+  vertical-align: middle;
+}*/
+
+.search-field
+{
+    display: inline;
+    width: 148px;
+    border: 1px solid #000000;
+}
+
+.btn-search
+{
+    background-color: #ffffff;
+    margin-left: -10px; 
+    margin-top: -3px;
+    height: 19px;  
+}
 
 
+ul li
+{
+    padding-top: 7px;
+    border-right: 1px solid #666666;
+    padding-right: 5000px;
+    padding-left: 10px;
 }
