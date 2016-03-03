@@ -5,54 +5,111 @@
     <title>BBC - Homepage</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="style.css" media="all" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <div class="black-color">
-      <div class="container black-color">
-        <div class="nav row">
-          <div class="logo col-lg-1">
-      	  	<a href="#">
-    		      <img src="res/img/bbc-blocks-light.png">
-    		    </a>
-      	  </div>
-          <div class="text-center  sign-in col-lg-1">
-        	  <a  href="#">Sign in</a>
-          </div>
-          <ul class="col-lg-7 list-unstyled text-center">
-            <li class="col-lg-1">
-              <a href="#">News</a>
-            </li>
-            <li class="col-lg-1">
-              <a href="#">Sport</a>
-            </li>
-            <li class="col-lg-2">
-              <a href="#">Weather</a>
-            </li>
-            <li class="col-lg-1">
-              <a href="#">Shop</a>
-            </li>
-            <li class="col-lg-1">
-              <a href="#">Earth</a>
-            </li>
-            <li class="col-lg-1">
-              <a href="#">Travel</a>
-            </li>
-            <li class="col-lg-2">
-              <a href="#">Capital</a>
-            </li>
-            <li class="col-lg-1">
-              <a href="#">Culture</a>
-            </li>
-            <li class="col-lg-1">
-              <a href="#">More</a>
-            </li>      	  
-          </ul>
-          <div class="col-lg-2">
-            <input class="search-field" placeholder="Search" type="text"> 
-            <img class="btn-search" href="#" src="res/img/orb-search-dark.png"/>
-          </div>
+    <!--<div class="black-color">
+      <nav class="nav-bar">
+        <div class="logo">
+          <a href="#"><img src="res/img/bbc-blocks-light.png"></a>
         </div>
-    	</div>
+        <div class="sign-in">Sign in </div>
+        <ul class="news-list">
+          <li>News</li>
+          <li>Sport</li>
+          <li>Weather</li>
+          <li>Shop</li>
+          <li>Earth</li>
+          <li>Travel</li>
+          <li>Capital</li>
+          <li>Culture</li>
+          <li class="more-news">More</li>
+        </ul>
+        <div class="search" >
+          <input class="search-field" placeholder="Search" type="text">
+          <!--<div class="btn-search">
+            <img href="#" src="res/img/orb-search-dark.png"/>
+          </div>          
+        </div>
+      </nav>
+    </div>-->
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><img src="res/img/bbc-blocks-light.png"></a>         
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li><a href="#">Sign in</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Sport</a></li>
+            <li><a href="#">Weather</a></li>
+            <li><a href="#">Shop</a></li>
+            <li><a href="#">Earth</a></li>
+            <li><a href="#">Travel</a></li>
+            <li><a href="#">Capital</a></li>
+            <li><a href="#">Culture</a></li>
+            <li><a href="#">More</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="jumbotron">
+      <section class="container">
+        <h2 class="text-right text-uppercase">Wednesday, 17 February</h2>
+        <div class="row">
+          <figure class="col-md-6">
+            <img src="res/img/_88309483_comp.jpg"/>
+            <h3>China 'has missiles on disputed island'</h3>
+            <p>Taiwan says China has deployed surface-to-air missiles on a disputed island in the South China Sea, but Beijing says it is an invention of the media.</p>
+          </figure>
+          <figure class="col-md-3">
+            <img src="res/img/_88308181_d26a77fe-f699-43ad-ab30-1037e85a9712.jpg"/>
+            <h4>How other countries<br>responded to Jeb Bush's<br>gun tweet</h4>           
+          </figure>
+          <figure class="col-md-3">
+            <img src="res/img/_88305266_ronaldo_afp-3.jpg"/>
+            <h4>Ronaldo walks out of news<br>conference</h4>              
+          </figure>
+          <figure class="col-md-3">
+            <img src="res/img/p03jvxwf.jpg"/>
+            <h4>The murder trial that<br>hanged TV forever</h4>              
+          </figure>
+          <figure class="col-md-3">
+            <img src="res/img/_88292820_feetbed_istock.jpg"/>
+            <h4>The rise of the 'afternoon<br>delight' hotel booking</h4>              
+          </figure>
+        </div>
+      </section>       
     </div>
+    <section class="container">
+      <div class="row">
+        <figure class="col-md-4">
+          <img src="res/img/_88316011_88316009.jpg"/>
+          <h5>Aid trucks reach besieged Syria town</h5>
+          <p>Aid reaches the rebel-held Syrian town of Muadhamiya, state media and aid agences say, the first of several convoys carrying relief to besieged areas.</p>
+        </figure>
+        <figure class="col-md-4">
+          <img src="res/img/_88308102_f5f1876fd07.jpg"/>
+          <h5>Apple rejects order to unlock killer's phone</h5>
+          <p>Apple chief executive Tim Cook says his company will contest a court order to help FBI investigators access data on the phone belonging to San Bernardino gunman Syed Rizwan Farook.</p>          
+        </figure>
+        <figure class="col-md-4">
+          <img src="res/img/_88309416_88309415.jpg"/>
+          <h5>Cameron in last-ditch EU wrangle</h5>
+          <p>David Cameron attempts to persuade Boris Johnson to back his EU reforms, amid last minute wrangling over the details in Brussels.</p>
+        </figure>
+      </div>     
+    </section>
   </body>
 </html>
