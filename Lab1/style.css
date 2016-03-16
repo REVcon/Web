@@ -16,10 +16,6 @@ html, body{
     background-color: #000000;
 }
 
-.navbar-header{
-    width: 100px;
-}
-
 .navbar-brand{
     padding: 8px 5px;
     padding-right: 15px;
@@ -42,8 +38,8 @@ html, body{
 }
 
 .navbar-default .navbar-nav li{
-     border-left: 1px solid #666666;
-     padding-bottom: 5px;
+    border-left: 1px solid #666666;
+    padding-bottom: 5px;
 }
 
 .navbar-default .navbar-nav li a{
@@ -53,12 +49,11 @@ html, body{
 }
 
 .nav  li  a{
-    padding: 10px 20px;
+    padding: 10px 25%;
 }
 
-.sign-in{
-    padding-left: 10px;
-    padding-right: 60px;   
+.sign-in{   
+    padding-right: 50px;   
 }
 
 h2{
@@ -73,6 +68,10 @@ h2{
     width: 80%;
 }
 
+.container-fluid{
+    width: 80%;
+}
+
 .jumbotron{
     padding-top: 0;
     padding-bottom: 20px;
@@ -80,8 +79,7 @@ h2{
     font-weight: inherit;
 }
 
-.col-md-3
-{
+.col-md-3{
     padding-right: 10px;
     padding-left: 10px;
 }
@@ -99,8 +97,8 @@ h2{
 }
 
 section .row img {
-      margin: 0 0 10px;
-      width: 100%;
+    margin: 0 0 10px;
+    width: 100%;
 }
 
 h3{
@@ -110,15 +108,12 @@ h3{
 }
 
  h4{
-   /* top: 50px;
-    left: 30px;*/ 
     text-decoration: none;
     font-size: 1.25rem;
     font-weight: inherit;
 }
 
-.small-caption
-{
+.small-caption{
     width: 100%;
     position: absolute;
     top: 30%;
@@ -178,14 +173,15 @@ p{
     font-weight: normal;
 }
 
-.more-tab{
-    padding-right: 55px;
+.more-tab-link{
+   padding-right: 50.95% !important;
 }
+
 .navbar-form{
     padding-right: 0;
     padding-left: 20;
     padding-top: 8px;
-    padding-bottom: 8px;
+    padding-bottom: 3px;
     margin: 0;
     margin-right: -15px;
 }
@@ -215,7 +211,7 @@ p{
 
 
 .navbar-default .navbar-form{
-        border-left: 1px solid #666666;
+        //border-left: 1px solid #666666;
 }
 
 .sign-in:hover{
@@ -252,4 +248,32 @@ p{
 
  .navbar-default .navbar-nav > li:hover, .navbar-default .navbar-nav > li:focus {
      padding-bottom: 0px !important; 
+}
+
+
+@media screen and (max-width: 1486px){
+    h3 {
+        font-size: 1.25rem;
+    }
+    h4 {
+        font-size: 1.125rem;
+    }
+}
+
+@media screen and (max-width: 768px){
+    h3, h4 {
+         font-size: 1.125rem;
+    }
+    .container-fluid
+    {
+        width :100%;
+    }
+    .container
+    {
+        width :90%;
+    }
+    .small-caption
+    {
+        left: 5%;
+    }
 }
