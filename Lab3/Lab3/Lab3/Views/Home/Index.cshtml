@@ -1,0 +1,69 @@
+﻿<div id="loginBar">
+    <table>
+        <tr><td><label>Пользователь: </label></td><td><input type="text" id="login" /></td></tr>
+        <tr><td><label>Пароль: </label></td><td><input type="password" id="pass" /></td></tr>
+    </table>
+    <button id="btnLogin">Войти</button>
+</div>
+<div>
+    <div id="msgBar"></div>
+    <div id="userBar"></div>
+</div>
+<div class="clear"></div>
+<div id="newMsgBar">
+    <textarea id="newMsgTextarea" placeholder="Введите свое сообщение..."></textarea>
+    <button id="btnSendMessage">Отправить</button>
+</div>
+<script type="text/javascript">
+
+    var chat;
+
+    $(document).ready(function () { 
+       
+        $("#msgBar").css('display', 'none');
+        $("#userBar").css('display', 'none');
+        $("#newMsgBar").css('display', 'none');
+        
+        $("#btnLogin").click(function (event) {
+            event.preventDefault();
+            Login();
+        });
+
+ 
+    });   
+
+    function SuccessLogin(data)
+    {
+        if (data != null) {
+            $("#msgBar").css('display', 'block');
+            $("#newMsgBar").css('display', 'block');
+            $("#loginBar").css('display', 'none');
+            chat = new Chat(data.Login);
+            chat.Init();
+        }
+        else {
+            alert("Login error")
+        };
+    }
+
+    function Login() {        
+        var user = {
+            Login: $('#login').val(),
+            Password: $('#pass').val()
+        };
+
+        $.ajax({
+            url: '/api/users',
+            type: 'POST',
+            data: JSON.stringify(user),
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                SuccessLogin(data);
+            },
+            error: function (x, y, z) {
+                alert("Error");
+            }
+        });
+    }
+
+</script>

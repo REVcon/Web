@@ -1,0 +1,41 @@
+﻿#newMsgTextarea{
+    overflow-y: auto;
+    float: left;
+    width: 400px;
+    height: 100px;
+    resize: none;
+}
+
+#btnSendMessage{
+    float: left;
+    height: 105px;
+}
+
+#msgBar{
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 60%;
+    height: 500px;
+    resize: none;
+    float: left;
+}
+
+#userBar{
+    background-color: #C0C0C0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 20%;
+    height: 500px;
+    resize: none;
+    float: left;
+}
+
+.clear{
+    clear: both;
+}
+
+.msg{
+    word-wrap: break-word;
+    background-color: #F1F2F4;
+    margin-bottom: 10px;
+}
