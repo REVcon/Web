@@ -1,0 +1,13 @@
+<div>
+	<h3><a href="{{info.link}}">{{info.title}}</a></h3>
+	<div ng-class="{'content-show': isWatched, 'content-hide': !isWatched}">
+		ПРОЧИТАНО
+	</div>
+    <div>{{info.publishedDate}}</div>
+	<button class="btn btn-item" ng-click="download()"> 
+	  {{ buttonText }} 
+	</button>
+	<div ng-class="{'content-show': isOpen, 'content-hide': !isOpen}">		
+		<div ng-bind-html="info.content"></div>
+	</div>
+</div>
