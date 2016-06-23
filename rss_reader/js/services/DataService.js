@@ -3,7 +3,6 @@ angular.module("RSSReaderApp").factory('DataService', function() {
     var editFeed = {};
     var curGroup = "";			
     return {
-
         saveToLocalStorage: function(){
             localStorage.setItem("RSSReaderApp", angular.toJson(groups));
         },
@@ -79,7 +78,7 @@ angular.module("RSSReaderApp").factory('DataService', function() {
             editFeed = feed;
         },
 
-        getEditFeed: function(feed)
+        getEditFeed: function()
         {
             return editFeed;
         },
@@ -95,4 +94,4 @@ angular.module("RSSReaderApp").factory('DataService', function() {
         }
 
     };
-})
+});

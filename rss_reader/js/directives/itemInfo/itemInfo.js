@@ -5,10 +5,9 @@ angular.module("RSSReaderApp").directive('itemInfo', function() {
     	info: '='
     },
     templateUrl: 'js/directives/itemInfo/itemInfo.html',
-    
     link: function(scope, element, attrs) {
-      scope.buttonText = "Читать описание",
-      scope.isOpen = false,
+      scope.buttonText = "Читать описание";
+      scope.isOpen = false;
       scope.isWatched = false;
       scope.content = scope.info.content;
 

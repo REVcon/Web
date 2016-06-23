@@ -5,16 +5,8 @@ angular.module("RSSReaderApp").controller('ModalInstanceController', function ($
     $scope.invalidUrl = false;
 
     $scope.ok = function () {
-        if ($scope.feedName == "" || $scope.feedName == undefined) {
-            $scope.invalidName = true;
-        } else {
-            $scope.invalidName = false;
-        }
-        if ($scope.feedURL == "" || $scope.feedURL == undefined) {
-            $scope.invalidUrl = true;
-        } else {
-            $scope.invalidUrl = false;
-        }
+        $scope.invalidName = !!($scope.feedName == "" || $scope.feedName == undefined);
+        $scope.invalidUrl = !!($scope.feedURL == "" || $scope.feedURL == undefined);
         if (!$scope.invalidName && !$scope.invalidUrl) {
             var temp = {};
             temp.name = $scope.feedName;
@@ -41,6 +33,6 @@ angular.module("RSSReaderApp").controller('ModalInstanceController', function ($
             $scope.btnText = "Добавить";
         }
 
-    }
+    };
     $scope.init();
 });
