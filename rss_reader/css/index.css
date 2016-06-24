@@ -1,7 +1,7 @@
-@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans&subset=latin,cyrillic);
 
 * {
-    font-family: roboto, sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 html, body {
@@ -17,7 +17,7 @@ html, body {
 }
 
 .left-column {
-    background-color: #293239;
+    background-color: #1D2027;
     height: 100vh;
     padding: 15px 0;
 }
@@ -44,66 +44,97 @@ html, body {
 }
 
 .items {
-    background-color: white;
+    background-color: #fff;
     overflow-y: scroll;
     height: 93vh;
 }
 
 .btn-add-feed {
-    margin-left: 50px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    display: block;
+    color: #fff;
+    border-radius: 2px;
+    margin: 40px auto 30px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background: #3BA5D1 none;
+    border: 1px solid #3BA5D1;
+}
+
+ul {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+li {
+    list-style-type: none;
+}
+
+hr {
+    background-color: #0A0A0A;
+    color: #0A0A0A;
+    height: 1px;
+    border-bottom: 1px solid #31343A;
+    border-top: none;
+    margin: 0 25px 20px;
 }
 
 .group-item {
     color: white;
     width: 100%;
     padding: 10px 10px 10px 27px;
-
+    cursor: pointer;
 }
 
 .new-group {
-    background-color: #485158;
+    background-color: #30333A;
     color: white;
     border: none;
     height: 28px;
     width: 190px;
-}
-
-.groups {
-    width: 100%;
+    padding-left: 10px;
 }
 
 .marker-red {
-    color: red;
+    color: #FF606F;
 }
 
 .marker-orange {
-    color: orange;
+    color: #FF9860;
 }
 
 .marker-yellow {
-    color: yellow;
+    color: #FFEF60;
 }
 
 .marker-green {
-    color: green;
+    color: #5CC45C;
 }
 
 .marker-blue {
-    color: blue;
+    color: #60FFF4;
 }
 
 .marker-cyan {
-    color: cyan;
+    color: #68BEE9;
 }
 
 .marker-purple {
-    color: purple;
+    color: #CC91FF;
 }
 
 .select-item {
-    background-color: #5e6371;
+    background-color: #464A54;
     -moz-appearance: none !important;
     -webkit-appearance: none !important;
     appearance: none !important;
@@ -120,7 +151,7 @@ html, body {
 }
 
 .dropdown-menu {
-    background-color: #5e6371;
+    background-color: #464A54;
 }
 
 .bootstrap-select .dropdown-toggle {
@@ -157,6 +188,14 @@ html, body {
     color: #5e6371;
 }
 
+.btn-remove-group{
+    color: #909090;
+}
+
+.btn-remove-group:hover{
+    color: #fff;
+}
+
 .search-icon {
     background-color: white;
 }
@@ -180,16 +219,23 @@ html, body {
     box-shadow: none;
 }
 
+.without-feeds {
+    color: #999999;
+    text-align: center;
+    padding-top: 10px;
+}
+
 .feed-url {
-    color: #7a7f8d;
+    color: #7A7F8D;
+    font-size: 12px;
 }
 
 .feed-chevron {
-    color: #7fb1c6;
+    color: #7FB1C6;
 }
 
 .feed-name {
-    color: #1f7ca3;
+    color: #1F7CA3;
 }
 
 .feed-item {
@@ -197,31 +243,44 @@ html, body {
     padding: 5px 15px;
     word-wrap: break-word;
     height: 91px;
+    cursor: pointer;
+}
+
+.feed-favicon {
+    width: 18px;
+    float: left;
+    margin-right: 5px;
+}
+
+.feed-btn{
+    color: #7A7F8D;
+}
+
+.feed-btn:hover{
+    color: #7FB1C6;
+}
+
+.activeFeed {
+    background-color: #f4f5f5;
 }
 
 .news-item {
     border-bottom: 1px solid #c8d3de;
 }
 
-.content-show {
-    display: block;
-}
-
-.content-hide {
-    display: none;
+.news-title {
+    color: #428BCA;
 }
 
 .btn-item {
-    margin: 10px 5px;
+    margin: 10px 0;
 }
 
 .activeGroup {
-    background-color: #485158;
+    background-color: #2B2E35;
 }
 
-.activeFeed {
-    background-color: #f4f5f5;
-}
+
 
 .btn-group {
     display: block;
@@ -247,13 +306,7 @@ html, body {
 }
 
 .btn-item {
-    background-color: #ededed;
-}
-
-.without-feeds {
-    color: #999999;
-    text-align: center;
-    padding-top: 10px;
+    background-color: #E7E7E7;
 }
 
 .preloader {
@@ -273,6 +326,10 @@ html, body {
     box-shadow: none;
 }
 
+.font12 {
+    font-size: 12px;
+}
+
 .row-bot img {
     max-width: 75%;
 }
@@ -281,11 +338,4 @@ input {
     outline: none;
 }
 
-.feed-favicon{
-    width: 20px;
-    float: left;
-}
 
-.feed-item:hover, .group-item:hover{
-    cursor: pointer;
-}

@@ -1,15 +1,15 @@
 angular.module("RSSReaderApp").controller("FeedController", ['$scope', '$filter', '$uibModal', '$window', 'FeedService', 'DataService',
     function ($scope, $filter, $uibModal, $window, Feed, Data) {
-        $scope.groups;
+        $scope.groups = {};
         $scope.markerType = "marker-red";
         $scope.curGroupName = "";
         $scope.loading = false;
         $scope.invalidGroupName = false;
 
-        $scope.init = function(){
+        $scope.init = function () {
             Data.getFromLocalStorage();
             $scope.groups = Data.getGroups();
-            if ($scope.groups.length != 0){
+            if ($scope.groups.length != 0) {
                 $scope.onGroupClick($scope.groups[0]);
             }
         };
@@ -58,7 +58,8 @@ angular.module("RSSReaderApp").controller("FeedController", ['$scope', '$filter'
             }
         };
 
-        $scope.removeGroup = function (group) {
+        $scope.removeGroup = function ($event, group) {
+            $event.stopPropagation();
             if (group.feeds.length > 0) {
                 $window.alert("Ошибка: нельзя удалить непустую группу");
                 return;
@@ -72,20 +73,23 @@ angular.module("RSSReaderApp").controller("FeedController", ['$scope', '$filter'
                 return;
             }
             Data.setEditFeed(undefined);
-            $scope.newFeedPopUp();
+            $scope.newFeedPopup();
         };
 
-        $scope.removeFeed = function (name) {
+        $scope.removeFeed = function ($event, name) {
+            $event.stopPropagation();
             Data.removeFeed($scope.curGroupName, name);
+            $scope.news = [];
         };
 
-        $scope.editFeed = function (feed) {
+        $scope.editFeed = function ($event, feed) {
+            $event.stopPropagation();
             Data.setCurGroup($scope.curGroupName);
             Data.setEditFeed(feed);
-            $scope.editFeedPopUp();
+            $scope.editFeedPopup();
         };
 
-        $scope.editFeedPopUp = function (size) {
+        $scope.editFeedPopup = function (size) {
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'js/directives/popup/popup.html',
@@ -100,7 +104,7 @@ angular.module("RSSReaderApp").controller("FeedController", ['$scope', '$filter'
             });
         };
 
-        $scope.newFeedPopUp = function (size) {
+        $scope.newFeedPopup = function (size) {
             var modalInstance = $uibModal.open({
                 animation: true,
                 templateUrl: 'js/directives/popup/popup.html',
@@ -119,7 +123,7 @@ angular.module("RSSReaderApp").controller("FeedController", ['$scope', '$filter'
             Data.saveToLocalStorage();
         };
 
-        $scope.getFaviconUrl = function(url) {
+        $scope.getFaviconUrl = function (url) {
             var domain;
             if (url.indexOf("://") > -1) {
                 domain = url.split('/')[2];
@@ -128,7 +132,7 @@ angular.module("RSSReaderApp").controller("FeedController", ['$scope', '$filter'
                 domain = url.split('/')[0];
             }
             domain = domain.split(':')[0];
-            if (!domain.indexOf("rss.")){
+            if (!domain.indexOf("rss.")) {
                 domain = domain.substring(4);
             }
             return 'http://' + domain + '/favicon.ico';
