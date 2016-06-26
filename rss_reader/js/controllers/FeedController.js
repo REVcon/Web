@@ -1,10 +1,10 @@
 angular.module("RSSReaderApp").controller("FeedController", ['$scope', '$filter', '$uibModal', '$window', 'FeedService', 'DataService',
     function ($scope, $filter, $uibModal, $window, Feed, Data) {
-        $scope.groups = {};
-        $scope.markerType = "marker-red";
-        $scope.curGroupName = "";
+        $scope.groups = [];
+        $scope.markerType = "<span class='glyphicon glyphicon-record marker-red'></span>";
         $scope.loading = false;
         $scope.invalidGroupName = false;
+        $scope.filterText = "";
 
         $scope.init = function () {
             Data.getFromLocalStorage();
@@ -30,21 +30,31 @@ angular.module("RSSReaderApp").controller("FeedController", ['$scope', '$filter'
                 for (var i = 0; i < news.length; i++) {
                     var temp = news[i].publishedDate;
                     news[i].publishedDate = $filter('date')(new Date(temp), "dd.MM.y в H:MM").toString();
+                    news[i].isWatched = false;
                 }
-                $scope.news = news.slice();
+                if (feed.news != []) {
+                    for (var k = 0; k < feed.news.length; ++k) {
+                        for (var j = 0; j < news.length; ++j) {
+                            if (news[j].title == feed.news[k].title) {
+                                news[j].isWatched = feed.news[k].isWatched;
+                                break;
+                            }
+                        }
+                    }
+                }
+                feed.news = news;
+                $scope.news = feed.news;
                 $scope.loading = false;
             });
         };
 
+        $scope.getFeedsNumber = function (id) {
+            return Data.getFeeds(id).length;
+        };
+
         $scope.onGroupClick = function (group) {
-            $scope.curGroupName = group.groupName;
-            $scope.selectedGroup = group.groupName;
-            for (var i = 0; i < $scope.groups.length; i++) {
-                if ($scope.groups[i].groupName == group.groupName) {
-                    $scope.feeds = $scope.groups[i].feeds;
-                    return;
-                }
-            }
+            $scope.selectedGroup = group.id;
+            $scope.feeds = Data.getFeeds(group.id);
         };
 
         $scope.addGroup = function (event) {
@@ -60,11 +70,11 @@ angular.module("RSSReaderApp").controller("FeedController", ['$scope', '$filter'
 
         $scope.removeGroup = function ($event, group) {
             $event.stopPropagation();
-            if (group.feeds.length > 0) {
+            if ($scope.getFeedsNumber(group.id) > 0) {
                 $window.alert("Ошибка: нельзя удалить непустую группу");
                 return;
             }
-            Data.removeGroup(group.groupName);
+            Data.removeGroup(group);
         };
 
         $scope.addFeed = function () {
@@ -76,15 +86,15 @@ angular.module("RSSReaderApp").controller("FeedController", ['$scope', '$filter'
             $scope.newFeedPopup();
         };
 
-        $scope.removeFeed = function ($event, name) {
+        $scope.removeFeed = function ($event, feed) {
             $event.stopPropagation();
-            Data.removeFeed($scope.curGroupName, name);
+            Data.removeFeed(feed);
             $scope.news = [];
+            $scope.feeds = Data.getFeeds(feed.groupID);
         };
 
         $scope.editFeed = function ($event, feed) {
             $event.stopPropagation();
-            Data.setCurGroup($scope.curGroupName);
             Data.setEditFeed(feed);
             $scope.editFeedPopup();
         };
@@ -96,11 +106,10 @@ angular.module("RSSReaderApp").controller("FeedController", ['$scope', '$filter'
                 controller: 'ModalInstanceController',
                 size: size
             });
-
             modalInstance.result.then(function (rec) {
                 Data.editFeed(rec);
+                $scope.feeds = Data.getFeeds($scope.selectedGroup);
             }, function () {
-
             });
         };
 
@@ -111,11 +120,10 @@ angular.module("RSSReaderApp").controller("FeedController", ['$scope', '$filter'
                 controller: 'ModalInstanceController',
                 size: size
             });
-
             modalInstance.result.then(function (rec) {
                 Data.addFeed(rec);
+                $scope.feeds = Data.getFeeds($scope.selectedGroup);
             }, function () {
-
             });
         };
 
@@ -136,29 +144,45 @@ angular.module("RSSReaderApp").controller("FeedController", ['$scope', '$filter'
                 domain = domain.substring(4);
             }
             return 'http://' + domain + '/favicon.ico';
-        }
+        };
+        $scope.changeMarkerColor = function (color) {
+            switch (color) {
+                case 'red':
+                    $scope.markerType = "<span class='glyphicon glyphicon-record marker-red'></span>";
+                    break;
+                case 'orange':
+                    $scope.markerType = "<span class='glyphicon glyphicon-record marker-orange'></span>";
+                    break;
+                case 'yellow':
+                    $scope.markerType = "<span class='glyphicon glyphicon-record marker-yellow'></span>";
+                    break;
+                case 'green':
+                    $scope.markerType = "<span class='glyphicon glyphicon-record marker-green'></span>";
+                    break;
+                case 'blue':
+                    $scope.markerType = "<span class='glyphicon glyphicon-record marker-blue'></span>";
+                    break;
+                case 'cyan':
+                    $scope.markerType = "<span class='glyphicon glyphicon-record marker-cyan'></span>";
+                    break;
+                case 'purple':
+                    $scope.markerType = "<span class='glyphicon glyphicon-record marker-purple'></span>";
+                    break;
+                default:
+                    break;
+            }
+        };
+
+        $scope.searchInContent = function () {
+            return function (item) {
+                var tmp = document.createElement("DIV");
+                tmp.innerHTML = item.content;
+                tmp.innerHTML += item.title;
+                var text = tmp.textContent.toLowerCase();
+                return (text.indexOf($scope.filterText.toLowerCase()) != -1);
+            };
+        };
+
+        $window.addEventListener('beforeunload', $scope.saveToLocalStorage, false);
 
     }]);
-
-
-function mockDataToLocalStorage() {
-    var groups = [{
-        groupName: "Программирование",
-        markerType: "marker-red",
-        feeds: [{name: "Hacker News", URL: 'http://news.ycombinator.com/rss'}, {
-            name: "Habrahabr",
-            URL: 'http://habrahabr.ru/rss'
-        }]
-    },
-        {
-            groupName: "Новости",
-            markerType: "marker-green",
-            feeds: [{name: "CNN", URL: 'http://rss.cnn.com/rss/cnn_topstories.rss'}, {
-                name: "Mashable",
-                URL: "http://feeds2.feedburner.com/Mashable"
-            }]
-        }];
-    localStorage.setItem("RSSReaderApp", angular.toJson(groups));
-}
-
-mockDataToLocalStorage();

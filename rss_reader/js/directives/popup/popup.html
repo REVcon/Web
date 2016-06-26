@@ -19,9 +19,9 @@
     <div class="row">
         <h4 class="col-sm-5">Группа</h4>
         <div class="col-sm-7">
-            <select class="pull-right popup-select" ng-model="selectedGroup"
-                    ng-init="selectedGroup = groups[0].groupName">
-                <option ng-repeat="group in groups" value="{{group.groupName}}">{{group.groupName}}</option>
+            <select class="pull-right popup-select" ng-model="selectedGroup" ng-options="group.id as group.name for group in groups"
+                    ng-init="selectedGroup = groups[0].id">
+                <option value="{{group.id}}">{{group.name}}</option>
             </select>
         </div>
     </div>

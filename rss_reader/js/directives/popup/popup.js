@@ -11,7 +11,7 @@ angular.module("RSSReaderApp").controller('ModalInstanceController', function ($
             var temp = {};
             temp.name = $scope.feedName;
             temp.url = $scope.feedURL;
-            temp.group = $scope.selectedGroup;
+            temp.groupID = $scope.selectedGroup;
             $uibModalInstance.close(temp);
         }
     };

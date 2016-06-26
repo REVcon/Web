@@ -41,11 +41,12 @@ html, body {
     height: 93vh;
     border-right: 1px solid #c8d3de;
     padding: 0;
+    overflow-y: auto;
 }
 
 .items {
     background-color: #fff;
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 93vh;
 }
 
@@ -101,7 +102,7 @@ hr {
     color: white;
     border: none;
     height: 28px;
-    width: 190px;
+    width: 100%;
     padding-left: 10px;
 }
 
@@ -131,35 +132,6 @@ hr {
 
 .marker-purple {
     color: #CC91FF;
-}
-
-.select-item {
-    background-color: #464A54;
-    -moz-appearance: none !important;
-    -webkit-appearance: none !important;
-    appearance: none !important;
-    padding: 3px 0 3px 12px;
-}
-
-.bs-caret {
-    display: none;
-    height: 0;
-    width: 0;
-    padding: 0;
-    margin: 0;
-    line-height: 0;
-}
-
-.dropdown-menu {
-    background-color: #464A54;
-}
-
-.bootstrap-select .dropdown-toggle {
-    padding-right: 0 !important;
-}
-
-.bootstrap-select button {
-    border-radius: 0 !important;
 }
 
 .new-group-field {
@@ -240,9 +212,9 @@ hr {
 
 .feed-item {
     border-bottom: 1px solid #c8d3de;
-    padding: 5px 15px;
+    padding: 15px 15px 50px;
     word-wrap: break-word;
-    height: 91px;
+    height: 100px;
     cursor: pointer;
 }
 
@@ -257,15 +229,16 @@ hr {
 }
 
 .feed-btn:hover{
-    color: #7FB1C6;
+    color: #3BA5D1;
 }
 
 .activeFeed {
     background-color: #f4f5f5;
 }
 
-.news-item {
+.newsItem {
     border-bottom: 1px solid #c8d3de;
+    padding-bottom: 5px;
 }
 
 .news-title {
@@ -279,8 +252,6 @@ hr {
 .activeGroup {
     background-color: #2B2E35;
 }
-
-
 
 .btn-group {
     display: block;
@@ -338,4 +309,64 @@ input {
     outline: none;
 }
 
+.marker-menu{
+    background-color: #5E6371;
+    cursor: pointer;
+    text-align: center;
+    width: 40px;
+    height: 28px;
+    line-height: 28px;
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+}
 
+.marker-dropdown li{
+    background-color: #464A54;
+}
+
+.marker-dropdown li:hover{
+    background-color: #5E6371;
+}
+
+.marker-dropdown{
+    margin-top: 3px;
+    border-radius: 3px;
+    padding: 5px 0;
+    background-color: #464A54;
+}
+
+#scrollbox3 {
+    max-height: 300px;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.track3 {
+    width: 10px;
+    background: rgba(0, 0, 0, 0);
+    margin-right: 2px;
+    border-radius: 10px;
+    -webkit-transition: background 250ms linear;
+    transition: background 250ms linear;
+}
+
+.track3:hover,
+.track3.dragging {
+    background: #d9d9d9;
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.handle3 {
+    width: 7px;
+    right: 0;
+    background: #999;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 7px;
+    -webkit-transition: width 250ms;
+    transition: width 250ms;
+}
+
+.track3:hover .handle3,
+.track3.dragging .handle3 {
+    width: 10px;
+}

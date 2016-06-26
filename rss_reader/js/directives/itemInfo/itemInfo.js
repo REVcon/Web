@@ -8,7 +8,7 @@ angular.module("RSSReaderApp").directive('itemInfo', function () {
         link: function (scope, element, attrs) {
             scope.buttonText = "Читать описание";
             scope.isOpen = false;
-            scope.isWatched = false;
+            //scope.isWatched = false;
             scope.content = scope.info.content;
 
             scope.showContent = function () {
@@ -17,7 +17,7 @@ angular.module("RSSReaderApp").directive('itemInfo', function () {
                     scope.isOpen = false;
                     scope.buttonText = "Читать описание"
                 } else {
-                    scope.isWatched = true;
+                    scope.info.isWatched = true;
                     scope.isOpen = true;
                     scope.buttonText = "Скрыть"
                 }

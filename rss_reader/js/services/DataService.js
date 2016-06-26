@@ -1,32 +1,44 @@
 angular.module("RSSReaderApp").factory('DataService', function () {
     var groups = [];
+    var feeds = [];
     var editFeed = {};
-    var curGroup = "";
+
     return {
         saveToLocalStorage: function () {
-            localStorage.setItem("RSSReaderApp", angular.toJson(groups));
+            localStorage.setItem("RSSReaderAppGroups", angular.toJson(groups));
+            localStorage.setItem("RSSReaderAppFeeds", angular.toJson(feeds));
         },
 
         getGroups: function () {
             return groups;
         },
 
+        getFeeds: function (groupID) {
+            var res = [];
+            for (var i = 0; i < feeds.length; ++i) {
+                if (feeds[i].groupID == groupID) {
+                    res.push(feeds[i]);
+                }
+            }
+            return res;
+        },
+
         addGroup: function (name, marker) {
             var temp = {};
-            temp.groupName = name;
+            temp.name = name;
             temp.markerType = marker;
-            temp.feeds = [];
+            if (groups.length > 0) {
+                temp.id = groups[groups.length - 1].id + 1;
+            } else {
+                temp.id = 1;
+            }
             groups.push(temp);
             this.saveToLocalStorage();
         },
 
-        setCurGroup: function (name) {
-            curGroup = name;
-        },
-
-        removeGroup: function (name) {
+        removeGroup: function (group) {
             for (var i = 0; i < groups.length; i++) {
-                if (groups[i].groupName == name) {
+                if (groups[i].id == group.id) {
                     groups.splice(i, 1);
                     this.saveToLocalStorage();
                     return;
@@ -36,37 +48,39 @@ angular.module("RSSReaderApp").factory('DataService', function () {
 
         addFeed: function (arg) {
             var temp = {};
+            if (feeds.length > 0) {
+                temp.id = feeds[feeds.length - 1].id + 1;
+            } else {
+                temp.id = 1;
+            }
             temp.name = arg.name;
             temp.URL = arg.url;
-            var i;
-            for (i = 0; i < groups.length; i++) {
-                if (groups[i].groupName == arg.group) {
-                    groups[i].feeds.push(temp);
-                    this.saveToLocalStorage();
-                    break;
-                }
-            }
+            temp.news = [];
+            temp.groupID = arg.groupID;
+            feeds.push(temp);
+            this.saveToLocalStorage();
         },
 
-        removeFeed: function (group, name) {
-            for (var i = 0; i < groups.length; i++) {
-                if (groups[i].groupName == group) {
-                    for (var j = 0; j < groups[i].feeds.length; j++) {
-                        if (groups[i].feeds[j].name == name) {
-                            groups[i].feeds.splice(j, 1);
-                            this.saveToLocalStorage();
-                            return;
-                        }
-                    }
+        removeFeed: function (feed) {
+            for (var i = 0; i < feeds.length; i++) {
+                if (feeds[i].id == feed.id) {
+                    feeds.splice(i, 1);
+                    this.saveToLocalStorage();
+                    return;
                 }
             }
-
         },
 
         editFeed: function (feed) {
-            this.removeFeed(curGroup, editFeed.name);
-            this.addFeed(feed);
-            this.saveToLocalStorage();
+            for (var i = 0; i < feeds.length; ++i) {
+                if (feeds[i].id == editFeed.id) {
+                    feeds[i].name = feed.name;
+                    feeds[i].URL = feed.url;
+                    feeds[i].groupID = feed.groupID;
+                    this.saveToLocalStorage();
+                    return;
+                }
+            }
         },
 
         setEditFeed: function (feed) {
@@ -78,13 +92,18 @@ angular.module("RSSReaderApp").factory('DataService', function () {
         },
 
         getFromLocalStorage: function () {
-            var dataAsStr = localStorage.getItem('RSSReaderApp');
-            var tempData = angular.fromJson(dataAsStr);
-            if (tempData == null) {
+            var groupsAsStr = localStorage.getItem('RSSReaderAppGroups');
+            var feedsAsStr = localStorage.getItem('RSSReaderAppFeeds');
+            var tempGroups = angular.fromJson(groupsAsStr);
+            var tempFeeds = angular.fromJson(feedsAsStr);
+            if (tempGroups == null) {
                 return;
             }
-            groups = tempData;
+            groups = tempGroups;
+            if (tempFeeds == null) {
+                return;
+            }
+            feeds = tempFeeds;
         }
-
     };
 });
