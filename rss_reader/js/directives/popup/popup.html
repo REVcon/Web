@@ -6,7 +6,7 @@
         <h4 class="col-sm-5">Название ленты</h4>
         <div class="col-sm-7">
             <input type="text" class="form-control pull-right" placeholder="Название ленты" ng-model="feedName"
-                   ng-class="{invalid: invalidName}" ng-mouseenter="invalidName = false"/>
+                   ng-maxlength="20"  ng-class="{invalid: invalidName}" ng-mouseenter="invalidName = false"/>
         </div>
     </div>
     <div class="row">

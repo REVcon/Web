@@ -337,8 +337,9 @@ input {
 
 #scrollbox3 {
     max-height: 300px;
-    width: 100%;
+    width: 100% !important;
     overflow-y: auto;
+    padding-right: 0 !important;
 }
 
 .track3 {
@@ -353,14 +354,12 @@ input {
 .track3:hover,
 .track3.dragging {
     background: #d9d9d9;
-    background: rgba(0, 0, 0, 0.15);
 }
 
 .handle3 {
     width: 7px;
     right: 0;
     background: #999;
-    background: rgba(0, 0, 0, 0.4);
     border-radius: 7px;
     -webkit-transition: width 250ms;
     transition: width 250ms;
@@ -369,4 +368,22 @@ input {
 .track3:hover .handle3,
 .track3.dragging .handle3 {
     width: 10px;
+}
+.group-name-input{
+    width: 80%;
+}
+
+
+@media screen and (max-width: 650px) {
+    .feeds{
+        padding-right: 5%;
+        padding-left: 5%;
+    }
+
+    .items{
+        padding-right: 5%;
+        padding-left: 5%;
+        height: auto;
+        border-top: 1px solid #c8d3de;
+    }
 }

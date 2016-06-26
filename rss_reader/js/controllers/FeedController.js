@@ -145,6 +145,7 @@ angular.module("RSSReaderApp").controller("FeedController", ['$scope', '$filter'
             }
             return 'http://' + domain + '/favicon.ico';
         };
+
         $scope.changeMarkerColor = function (color) {
             switch (color) {
                 case 'red':
@@ -183,6 +184,13 @@ angular.module("RSSReaderApp").controller("FeedController", ['$scope', '$filter'
             };
         };
 
-        $window.addEventListener('beforeunload', $scope.saveToLocalStorage, false);
+        $scope.truncateUrl = function (url) {
+            if (url.length > 30) {
+                return url.substr(0, 30) + "...";
+            }
+            return url;
+        };
+
+        $window.addEventListener('beforeunload', $scope.saveToLocalStorage);
 
     }]);
