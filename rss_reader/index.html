@@ -1,112 +1,107 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>RssReader</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="css/index.css" media="all"/>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-select.min.css" media="all"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>RssReader</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+  <link rel="stylesheet" type="text/css" href="css/index.css" media="all"/>
 </head>
 <body ng-app="RSSReaderApp">
-<div class="container-fluid" ng-controller="FeedController" ng-init="init();">
-    <div class="row">
-        <div class="col-sm-2 left-column" ng-mouseleave="showMarkerMenu = false">
-            <img class="logo" src="img/logo.png"/>
-            <button type="button" class="btn-add-feed" ng-click="addFeed()">Добавить ленту</button>
-            <hr class="hr-line">
-            <div id="scrollbox3">
-                <ul>
-                    <li ng-repeat="group in groups" ng-click="onGroupClick(group)"
-                        ng-class="{activeGroup: isActiveGroup(group.id)}">
-                        <div class="group-item" ng-mouseenter="groupMenuShow = true" ng-mouseleave="groupMenuShow = false;
-                        invalidGroupName = true">
-                            <div class="float-left">
-                                <span ng-bind-html="group.markerType"></span>
-                                <span class="group-name">{{group.name}} ({{getFeedsNumber(group.id)}})</span>
-                            </div>
-                            <div class="float-right btn-remove-group" ng-show="groupMenuShow"
-                                 ng-click="removeGroup($event,group)">
-                                <span class="glyphicon glyphicon-trash"></span>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                    </li>
-                </ul>
+<div ng-controller="FeedController">
+  <div class="left-column" ng-mouseleave="showMarkerMenu = false; invalidGroupName = false">
+    <img class="logo" src="img/logo.png"/>
+    <button type="button" class="btn-add-feed" ng-click="addFeed()">Добавить ленту</button>
+    <hr class="hr-line">
+    <div id="scrollbox3">
+      <ul>
+        <li ng-repeat="group in groups" ng-click="onGroupClick(group)"
+            ng-class="{activeGroup: isActiveGroup(group.id)}">
+          <div class="group-item" ng-mouseenter="groupMenuShow = true" ng-mouseleave="groupMenuShow = false">
+            <div class="float-left">
+              <span class="glyphicon glyphicon-record {{group.markerType}}"></span>
+              <span class="group-name">{{group.name}} ({{getFeedsNumber(group.id)}})</span>
             </div>
-            <div class="new-group-field">
-                <div class="marker-menu float-left" ng-click="showMarkerMenu = !showMarkerMenu"> <span ng-bind-html="markerType" ></span>
-                    <ul class="marker-dropdown" ng-show="showMarkerMenu">
-                        <li ng-click="changeMarkerColor('red')"><span class='glyphicon glyphicon-record marker-red'></span></li>
-                        <li ng-click="changeMarkerColor('orange')"><span class='glyphicon glyphicon-record marker-orange'></span></li>
-                        <li ng-click="changeMarkerColor('yellow')"><span class='glyphicon glyphicon-record marker-yellow'></span></li>
-                        <li ng-click="changeMarkerColor('green')"><span class='glyphicon glyphicon-record marker-green'></span></li>
-                        <li ng-click="changeMarkerColor('blue')"><span class='glyphicon glyphicon-record marker-blue'></span></li>
-                        <li ng-click="changeMarkerColor('cyan')"><span class='glyphicon glyphicon-record marker-cyan'></span></li>
-                        <li ng-click="changeMarkerColor('purple')"><span class='glyphicon glyphicon-record marker-purple'></span></li>
-                    </ul>
-                </div>
-                <div class="float-left group-name-input">
-                    <input type="text" class="new-group" autocomplete="off" placeholder="Название группы" ng-maxlength="20"
-                           ng-model="groupName" ng-keypress="addGroup($event);" ng-class="{invalid: invalidGroupName}"/>
-                </div>
+            <div class="float-right btn-remove-group" ng-show="groupMenuShow"
+                 ng-click="removeGroup($event,group)">
+              <span class="glyphicon glyphicon-trash"></span>
             </div>
-        </div>
-        <div class="col-sm-10 right-column">
-            <div class="row row-top">
-                <div class="col-sm-3 search-col">
-                    <div class="input-group input-group-sm search-field">
-                        <input type="text" class="form-control" ng-model="filterText"
-                               placeholder="Поиск по новостям..." aria-describedby="sizing-addon1">
-                        <span class="input-group-addon" id="sizing-addon1"><span
-                                class="glyphicon glyphicon-search"></span></span>
-                    </div>
-                </div>
-            </div>
-            <div class="row row-bot">
-                <div class="col-sm-3 feeds">
-                    <div ng-hide="feeds.length > 0">
-                        <p class="without-feeds">Список пуст</p>
-                    </div>
-                    <div ng-repeat="feed in feeds" ng-click="onFeedClick(feed)"
-                         ng-class="{activeFeed: isActiveFeed(feed.name)}">
-                        <div class="feed-item" ng-mouseenter="feedMenuShow = true" ng-mouseleave="feedMenuShow = false">
-                            <div>
-                                <img class="feed-favicon" ng-src="{{getFaviconUrl(feed.URL)}}"/>
-                                <p class="feed-name float-left">{{feed.name}}</p>
-                                <div class="clear"></div>
-                                <p class="feed-url float-left">{{truncateUrl(feed.URL)}}</p>
-                                <span class="pull-right glyphicon glyphicon-chevron-right feed-chevron"></span>
-                                <div class="clear"></div>
-                            </div>
-                            <div class="float-right" ng-show="feedMenuShow">
-                                <span class="glyphicon glyphicon-pencil feed-btn"
-                                      ng-click="editFeed($event, feed)"></span>
-                                <span class="glyphicon glyphicon-trash feed-btn"
-                                      ng-click="removeFeed($event,feed)"></span>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-9 items">
-                    <div ng-show="loading" class="preloader">
-                    </div>
-                    <div ng-hide="loading" ng-repeat="item in news | filter:searchInContent()">
-                        <div ng-class="{newsItem: !$last}">
-                            <item-info info="item"></item-info>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            <div class="clear"></div>
+          </div>
+        </li>
+      </ul>
     </div>
+    <div class="new-group-field">
+      <div class="marker-menu float-left" ng-click="showMarkerMenu = !showMarkerMenu"
+           ng-blur="showMarkerMenu = false"><span class="glyphicon glyphicon-record {{markerType}}"></span>
+        <ul class="marker-dropdown" ng-show="showMarkerMenu">
+          <li ng-click="changeMarkerColor('red')"><span class='glyphicon glyphicon-record marker-red'></span></li>
+          <li ng-click="changeMarkerColor('orange')"><span class='glyphicon glyphicon-record marker-orange'></span>
+          </li>
+          <li ng-click="changeMarkerColor('yellow')"><span class='glyphicon glyphicon-record marker-yellow'></span>
+          </li>
+          <li ng-click="changeMarkerColor('green')"><span class='glyphicon glyphicon-record marker-green'></span></li>
+          <li ng-click="changeMarkerColor('blue')"><span class='glyphicon glyphicon-record marker-blue'></span></li>
+          <li ng-click="changeMarkerColor('cyan')"><span class='glyphicon glyphicon-record marker-cyan'></span></li>
+          <li ng-click="changeMarkerColor('purple')"><span class='glyphicon glyphicon-record marker-purple'></span>
+          </li>
+        </ul>
+      </div>
+      <div class="float-left group-name-input" ng-blur="invalidGroupName = false">
+        <input type="text" class="new-group" autocomplete="off" placeholder="Название группы" ng-maxlength="20"
+               ng-model="groupName" ng-keypress="addGroup($event);" ng-class="{invalid: invalidGroupName}"/>
+      </div>
+    </div>
+  </div>
+  <div class="right-column">
+    <div class="search-col">
+      <div class="input-group input-group-sm search-field">
+        <input type="text" class="form-control" ng-model="filterText" placeholder="Поиск по новостям..."
+               aria-describedby="sizing-addon1">
+        <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
+      </div>
+    </div>
+    <div class="clear"></div>
+    <div class="feeds">
+      <div ng-hide="feeds.length > 0">
+        <p class="without-feeds">Список лент пуст</p>
+      </div>
+      <div ng-repeat="feed in feeds" ng-click="onFeedClick(feed)"
+           ng-class="{activeFeed: isActiveFeed(feed.name)}">
+        <div class="feed-item" ng-mouseenter="feedMenuShow = true" ng-mouseleave="feedMenuShow = false">
+          <div>
+            <img class="feed-favicon" ng-src="{{getFaviconUrl(feed.URL)}}"/>
+            <p class="feed-name float-left">{{feed.name}}</p>
+            <div class="clear"></div>
+            <p class="feed-url float-left">{{truncateUrl(feed.URL)}}</p>
+            <span class="pull-right glyphicon glyphicon-chevron-right feed-chevron"></span>
+            <div class="clear"></div>
+          </div>
+          <div class="float-right" ng-show="feedMenuShow">
+            <span class="glyphicon glyphicon-pencil feed-btn" ng-click="editFeed($event, feed)"></span>
+            <span class="glyphicon glyphicon-trash feed-btn" ng-click="removeFeed($event,feed)"></span>
+          </div>
+          <div class="clear"></div>
+        </div>
+      </div>
+    </div>
+    <div class="items">
+      <div ng-hide="news.length > 0 || loading">
+        <p class="without-feeds">Список новостей пуст</p>
+      </div>
+      <div ng-show="loading" class="preloader">
+      </div>
+      <div ng-hide="loading" ng-repeat="item in news | filter:searchInContent()">
+        <div ng-class="{newsItem: !$last}">
+          <item-info info="item"></item-info>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!--libs-->
-
 <script src="js/libs/jquery.min.js"></script>
 <script src="js/libs/bootstrap.min.js"></script>
-<script src="js/libs/bootstrap-select.min.js"></script>
 <script src="js/libs/angular.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.2/angular-sanitize.js"></script>
 <script src="js/libs/ui-bootstrap-tpls-1.3.3.min.js"></script>

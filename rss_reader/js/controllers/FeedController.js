@@ -1,7 +1,7 @@
 angular.module("RSSReaderApp").controller("FeedController", ['$scope', '$filter', '$uibModal', '$window', 'FeedService', 'DataService',
     function ($scope, $filter, $uibModal, $window, Feed, Data) {
         $scope.groups = [];
-        $scope.markerType = "<span class='glyphicon glyphicon-record marker-red'></span>";
+        $scope.markerType = "marker-red";
         $scope.loading = false;
         $scope.invalidGroupName = false;
         $scope.filterText = "";
@@ -45,6 +45,10 @@ angular.module("RSSReaderApp").controller("FeedController", ['$scope', '$filter'
                 feed.news = news;
                 $scope.news = feed.news;
                 $scope.loading = false;
+            }, function () {
+                $scope.news = feed.news;
+                $scope.loading = false;
+                $window.alert("Ошибка: не удалось получить список новостей");
             });
         };
 
@@ -149,25 +153,25 @@ angular.module("RSSReaderApp").controller("FeedController", ['$scope', '$filter'
         $scope.changeMarkerColor = function (color) {
             switch (color) {
                 case 'red':
-                    $scope.markerType = "<span class='glyphicon glyphicon-record marker-red'></span>";
+                    $scope.markerType = "marker-red";
                     break;
                 case 'orange':
-                    $scope.markerType = "<span class='glyphicon glyphicon-record marker-orange'></span>";
+                    $scope.markerType = "marker-orange";
                     break;
                 case 'yellow':
-                    $scope.markerType = "<span class='glyphicon glyphicon-record marker-yellow'></span>";
+                    $scope.markerType = "marker-yellow";
                     break;
                 case 'green':
-                    $scope.markerType = "<span class='glyphicon glyphicon-record marker-green'></span>";
+                    $scope.markerType = "marker-green";
                     break;
                 case 'blue':
-                    $scope.markerType = "<span class='glyphicon glyphicon-record marker-blue'></span>";
+                    $scope.markerType = "marker-blue";
                     break;
                 case 'cyan':
-                    $scope.markerType = "<span class='glyphicon glyphicon-record marker-cyan'></span>";
+                    $scope.markerType = "marker-cyan";
                     break;
                 case 'purple':
-                    $scope.markerType = "<span class='glyphicon glyphicon-record marker-purple'></span>";
+                    $scope.markerType = "marker-purple";
                     break;
                 default:
                     break;
@@ -192,5 +196,6 @@ angular.module("RSSReaderApp").controller("FeedController", ['$scope', '$filter'
         };
 
         $window.addEventListener('beforeunload', $scope.saveToLocalStorage);
+        $scope.init();
 
     }]);

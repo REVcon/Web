@@ -20,34 +20,46 @@ html, body {
     background-color: #1D2027;
     height: 100vh;
     padding: 15px 0;
+    min-width: 260px !important;
+    width: 16%;
+    float: left;
+    min-height: 755px;
 }
 
 .right-column {
-    padding-left: 40px;
+    padding-left: 2%;
     background-color: #F0F1F5;
-}
-
-.row-bot {
-    border-radius: 3px;
-    border: 1px solid #c8d3de;
-}
-
-.row-top {
-    height: 51px;
+    width: 84%;
+    max-width: calc(100% - 260px);
+    float: left;
+    min-height: 755px;
 }
 
 .feeds {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border: 1px solid #c8d3de;
     background-color: white;
-    height: 93vh;
-    border-right: 1px solid #c8d3de;
+    height: calc(100vh - 51px);
     padding: 0;
     overflow-y: auto;
+    min-width: 240px;
+    width: 25%;
+    float: left;
+    min-height: 704px;
 }
 
 .items {
+    border-top: 1px solid #c8d3de;
     background-color: #fff;
     overflow-y: auto;
-    height: 93vh;
+    height: calc(100vh - 51px);
+    width: 75%;
+    max-width: calc(100% - 240px);
+    float: left;
+    padding-right: 15px;
+    padding-left: 15px;
+    min-height: 704px;
 }
 
 .btn-add-feed {
@@ -70,6 +82,11 @@ html, body {
     user-select: none;
     background: #3BA5D1 none;
     border: 1px solid #3BA5D1;
+}
+
+.btn-add-feed:hover {
+    background-color: #286090;
+    border-color: #286090;
 }
 
 ul {
@@ -95,6 +112,10 @@ hr {
     width: 100%;
     padding: 10px 10px 10px 27px;
     cursor: pointer;
+}
+
+.group-item:hover {
+    background-color: #373A41;
 }
 
 .new-group {
@@ -160,11 +181,11 @@ hr {
     color: #5e6371;
 }
 
-.btn-remove-group{
+.btn-remove-group {
     color: #909090;
 }
 
-.btn-remove-group:hover{
+.btn-remove-group:hover {
     color: #fff;
 }
 
@@ -178,6 +199,10 @@ hr {
 
 .search-col {
     padding: 0;
+    min-width: 240px;
+    width: 25%;
+    float: left;
+    height: 51px;
 }
 
 .input-group-addon {
@@ -218,17 +243,21 @@ hr {
     cursor: pointer;
 }
 
+.feed-item:hover {
+    background-color: #E7E7E7;
+}
+
 .feed-favicon {
     width: 18px;
     float: left;
     margin-right: 5px;
 }
 
-.feed-btn{
+.feed-btn {
     color: #7A7F8D;
 }
 
-.feed-btn:hover{
+.feed-btn:hover {
     color: #3BA5D1;
 }
 
@@ -249,16 +278,16 @@ hr {
     margin: 10px 0;
 }
 
+.btn-item:hover {
+    background-color: #CCCDCD;
+}
+
 .activeGroup {
     background-color: #2B2E35;
 }
 
 .btn-group {
     display: block;
-}
-
-.popup {
-    height: 160px;
 }
 
 .popup .row {
@@ -270,6 +299,7 @@ hr {
     height: 34px;
     border-radius: 3px;
     border: 1px solid #c8d3de;
+    padding-left: 10px;
 }
 
 .popup .col-sm-9 {
@@ -301,7 +331,7 @@ hr {
     font-size: 12px;
 }
 
-.row-bot img {
+.items img {
     max-width: 75%;
 }
 
@@ -309,7 +339,7 @@ input {
     outline: none;
 }
 
-.marker-menu{
+.marker-menu {
     background-color: #5E6371;
     cursor: pointer;
     text-align: center;
@@ -320,15 +350,15 @@ input {
     border-top-left-radius: 3px;
 }
 
-.marker-dropdown li{
+.marker-dropdown li {
     background-color: #464A54;
 }
 
-.marker-dropdown li:hover{
+.marker-dropdown li:hover {
     background-color: #5E6371;
 }
 
-.marker-dropdown{
+.marker-dropdown {
     margin-top: 3px;
     border-radius: 3px;
     padding: 5px 0;
@@ -369,21 +399,60 @@ input {
 .track3.dragging .handle3 {
     width: 10px;
 }
-.group-name-input{
+
+.group-name-input {
     width: 80%;
 }
 
-
-@media screen and (max-width: 650px) {
-    .feeds{
-        padding-right: 5%;
-        padding-left: 5%;
+@media screen and (max-width: 740px) {
+    .feeds {
+        height: auto;
+        min-height: 50vh;
+        float: none;
+        width: 100%;
+        border-radius: 3px;
+        border: 1px solid #c8d3de;
     }
 
-    .items{
-        padding-right: 5%;
-        padding-left: 5%;
+    .search-col {
+        width: 100%;
+    }
+
+    .items {
         height: auto;
-        border-top: 1px solid #c8d3de;
+        margin-top: 10px;
+        float: none;
+        width: 100%;
+        max-width: 100%;
+        min-height: calc(50vh - 51px);
+        border-radius: 3px;
+        border: 1px solid #c8d3de;
+    }
+
+    .right-column {
+        padding-left: 2%;
+        padding-right: 2%;
+        height: 100vh;
+        overflow-y: auto;
     }
 }
+
+@media screen and (max-width: 520px) {
+    .left-column {
+        float: none;
+        width: 100%;
+        min-height: 800px;
+    }
+
+    .right-column {
+        float: none;
+        width: 100%;
+        max-width: 100%;
+        padding-left: 5%;
+        padding-right: 5%;
+        overflow-y: hidden;
+        height: auto;
+        min-height: 100%;
+    }
+}
+
